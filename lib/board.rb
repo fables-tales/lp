@@ -22,7 +22,7 @@ class Board
 
   def capture_square(x,y,player)
     if x >= 0 and x <= 5 and y >= 0 and y <= 5
-      @board[y][x][:color] = player unless @board[y][x][:concrete]
+      cell(x,y)[:color] = player unless cell(x,y)[:concrete]
     end
   end
 
