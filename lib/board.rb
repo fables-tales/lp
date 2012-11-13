@@ -1,4 +1,7 @@
+require "set"
+
 class Board
+  WORDS = Set.new(open("/usr/share/dict/words").read.strip.split("\n"))
   def initialize
     @board = make_board
   end
