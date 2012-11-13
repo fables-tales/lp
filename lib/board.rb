@@ -26,6 +26,10 @@ class Board
     end
   end
 
+  def has_letters?(word)
+    all_letters.select{|letter| word.include? letter}.uniq.size == word.size
+  end
+
   def update_concreteness
     5.times do |y|
       5.times do |x|
