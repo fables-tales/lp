@@ -76,11 +76,11 @@ class Board
   end
 
   def isedgey(y)
-    return y == 0 || y == 4
+    y == 0 || y == 4
   end
 
   def isedgex(x)
-    return x == 0 || x == 4
+    x == 0 || x == 4
   end
 
   def make_board(letters=nil)
