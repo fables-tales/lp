@@ -4,6 +4,16 @@ require "board"
 describe Board do
   subject { Board.new }
 
+  describe "#word_valid?" do
+    it "has the word potato" do
+      subject.word_valid?("potato").should be_true
+    end
+
+    it "doesn't have the word asldkjf" do
+      subject.word_valid?("asldkjf").should be_false
+    end
+  end
+
   describe "#score_board" do
     it "is zero with a blank board for the player" do
       subject.score_board(:player).should == 0
