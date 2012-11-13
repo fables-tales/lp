@@ -17,7 +17,7 @@ class Board
   end
 
   def score_board(player)
-    @board.flatten.select {|square| square[:color] == player}.count
+    all_cells.select {|square| square[:color] == player}.count
   end
 
   def capture_square(x,y,player)
@@ -87,5 +87,13 @@ class Board
   def make_square
     letter = "abcdefghijklmnopqrstuvwxyz".split("").sample
     {:letter => letter, :color => nil, :concrete => false}
+  end
+
+  def all_letters
+    all_cells.map {|cell| cell[:letter]}
+  end
+
+  def all_cells
+    @board.flatten
   end
 end
