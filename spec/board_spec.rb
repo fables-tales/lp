@@ -36,6 +36,14 @@ describe Board do
       it "passes with nil letters but a valid word" do
         subject.can_play?([[0,0]]).should be_true
       end
+
+      it "passes with letters matching the word" do
+        subject.can_play?([[0,0]], "a").should be_true
+      end
+
+      it "fails with unmatching letters" do
+        subject.can_play?([[0,0],[4,2]]).should be_false
+      end
     end
   end
 
