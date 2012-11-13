@@ -26,6 +26,17 @@ class Board
     end
   end
 
+  def can_play?(positions, letters = nil)
+    actual_letters = positions.map {|position| cell(position[0],position[1])[:letter]}.join("")
+    return false if actual_letters != letters and letters != nil
+
+    return has_letters?(actual_letters) && word_valid?(actual_letters)
+  end
+
+  def word_valid?(word)
+    WORDS.include? word
+  end
+
   def has_letters?(word)
     all_letters.select{|letter| word.include? letter}.uniq.size == word.size
   end
