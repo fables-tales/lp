@@ -51,7 +51,7 @@ class Board
   private
 
   def neighbor_count(x, y)
-    current_color = @board[y][x][:color]
+    current_color = cell(x,y)[:color]
     r = 0
     r += 1 if @board[y-1][x][:color] == current_color unless y == 0
     r += 1 if @board[y+1][x][:color] == current_color unless y == 4
