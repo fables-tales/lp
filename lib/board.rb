@@ -2,8 +2,8 @@ require "set"
 
 class Board
   WORDS = Set.new(open("/usr/share/dict/words").read.strip.split("\n"))
-  def initialize
-    @board = make_board
+  def initialize(letters=nil)
+    @board = parse_letters(letters) || make_board
   end
 
   def to_s
@@ -72,21 +72,29 @@ class Board
     return x == 0 || x == 4
   end
 
-  def make_board
+  def make_board(letters=nil)
     board = []
-    5.times do
+    5.times do |y|
       row = []
-      5.times do
-        row << make_square
+      5.times do |x|
+        letter = (letters != nil) ? letters[y*5+x] : nil
+        row << make_square(letter)
       end
       board << row
     end
-    board
+
+    return board
   end
 
-  def make_square
-    letter = "abcdefghijklmnopqrstuvwxyz".split("").sample
+  def make_square(letter=nil)
+    letter ||= "abcdefghijklmnopqrstuvwxyz".split("").sample
     {:letter => letter, :color => nil, :concrete => false}
+  end
+
+  def parse_letters(letters)
+    return nil if letters == nil or letters.size != 25
+    make_board(letters)
+
   end
 
   def all_letters
