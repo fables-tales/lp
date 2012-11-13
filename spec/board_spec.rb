@@ -4,6 +4,41 @@ require "board"
 describe Board do
   subject { Board.new }
 
+  describe "#initialize" do
+    it "pulls the right letter from the specified grid" do
+      b = Board.new("abcdefghijklmnoprsqtuvwxy")
+      b.cell(3,1)[:letter].should == "i"
+    end
+  end
+
+  describe "#has_letters?" do
+    context "with the alphabet as our board" do
+      subject {Board.new("abcdefghijklmnoprsqtuvwxy")}
+
+      it "thinks it has the alphabet" do
+        subject.has_letters?("abcdefghijklmnoprstuvwxy").should be_true
+      end
+
+      it "doesn't pass on a word with duplicates" do
+        subject.has_letters?("there").should be_false
+      end
+
+      it "does pass on a subset of the letters" do
+        subject.has_letters?("bacon").should be_true
+      end
+    end
+  end
+
+  describe "#can_play?" do
+    context "with the alphabet as our board" do
+      subject {Board.new("abcdefghijklmnoprsqtuvwxy")}
+
+      it "passes with nil letters but a valid word" do
+        subject.can_play?([[0,0]]).should be_true
+      end
+    end
+  end
+
   describe "#word_valid?" do
     it "has the word potato" do
       subject.word_valid?("potato").should be_true
@@ -33,6 +68,7 @@ describe Board do
       subject.score_board(:opponent).should == 0
     end
   end
+
 
   describe "#update_concreteness" do
     it "doesn't concrete anything when the board is fresh" do
